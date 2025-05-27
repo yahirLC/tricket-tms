@@ -8,6 +8,7 @@ import com.tricket.demo.service.CategoriaService;
 import com.tricket.demo.service.EstadoService;
 import com.tricket.demo.service.TicketService;
 import com.tricket.demo.service.UsuarioService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -119,4 +120,20 @@ public class TicketController {
         ticketService.guardarTicket(ticket);
         return "redirect:/admin"; // Redirige a la página de administración después de guardar
     }
+
+    @PostMapping("/ticket/cerrar")
+    public String cerrarTicket(@RequestParam("id") Integer ticketId,
+            HttpServletRequest request) {
+        TicketJPA ticket = ticketService.obtenerTicketPorId(ticketId);
+        if (ticket != null) {
+            ticket.setEstado_id(3); // Estado 3 = Cerrado
+            ticket.setFecha_cierre(new Timestamp(System.currentTimeMillis())); // Marca de tiempo actual
+            ticketService.guardarTicket(ticket);
+        }
+
+        // Redirigir al Referer si existe, si no, a /admin como respaldo
+        String referer = request.getHeader("Referer");
+        return "redirect:" + (referer != null ? referer : "/admin");
+    }
+
 }

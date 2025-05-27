@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ADMIN</title>
+        <title>CLIENTE</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
         <style>
@@ -94,9 +94,7 @@
                 font-size: 2.5rem;
                 font-weight: bold;
             }
-            #tablaGenerales {
-                display: none; /* Ahora se oculta por defecto */
-            }
+           
             /* Estilos para el chat flotante, si es necesario ajustar */
             #chatFlotante {
                 position: fixed;
@@ -127,18 +125,11 @@
             }
         </style>
         <script>
-            function mostrarTablaGenerales() {
-                document.getElementById("dashboardRow").style.display = "none";
-                document.getElementById("tablaGenerales").style.display = "block";
-                document.getElementById("mistickets").style.display = "none"; // Asegurarse de ocultar otros
-                document.getElementById("equipoContainer").style.display = "none"; // Asegurarse de ocultar otros
-                document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
-                buscarEnTabla();
-            }
+          
 
             function mostrarMistickets() {
                 document.getElementById("dashboardRow").style.display = "none";
-                document.getElementById("tablaGenerales").style.display = "none";
+              
                 document.getElementById("mistickets").style.display = "block";
                 document.getElementById("equipoContainer").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
@@ -234,7 +225,7 @@
 
             function mostrarEquipo() {
                 document.getElementById("dashboardRow").style.display = "none";
-                document.getElementById("tablaGenerales").style.display = "none";
+               
                 document.getElementById("mistickets").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("equipoContainer").style.display = "flex";
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
@@ -347,7 +338,7 @@
 
         <div class="navbar-admin">
             <div class="admin-info">
-                <span class="admin-text">${usuarioLogueado.nombre} - Admin</span>
+                <span class="admin-text">${usuarioLogueado.nombre} - Cliente</span>
                 <div class="dropdown-admin">
                     <span class="dropdown-toggle-admin" onclick="toggleDropdown()">&#8942;</span>
                     <div id="adminDropdownMenu" class="dropdown-menu-admin" style="display: none;">
@@ -360,7 +351,7 @@
         <div style="display: flex;">
             <div class="sidebar">
                 <h4 class="text-center">TRICKET</h4>
-                <a href="/admin">Dashboard</a>
+                <a href="/cliente">Dashboard</a>
                 <a href="#">Opción 2</a>
             </div>
 
@@ -372,12 +363,7 @@
                             <div class="dashboard-number">${misticketsNoCerrados}-${totalMisTickets}</div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="dashboard-card" onclick="mostrarTablaGenerales()">
-                            <div class="dashboard-title">Generales</div>
-                            <div class="dashboard-number">${ticketsNoCerrados}-${totalTickets}</div>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-4">
                         <div class="dashboard-card" onclick="mostrarEquipo()">
                             <div class="dashboard-title">Equipo</div>
@@ -386,51 +372,7 @@
                     </div>
                 </div>
 
-                <div id="tablaGenerales" class="table-responsive mt-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="mb-3">
-                            <input type="text" id="searchInput" onkeyup="buscarEnTabla()" placeholder="Buscar..." class="form-control" style="width: 300px; display: inline-block;">
-                            <label>
-                                <input type="checkbox" id="mostrarFinalizados" onclick="buscarEnTabla()"> Finalizados
-                            </label>
-                        </div>
-                        <div class="ms-auto">
-                            <button class="btn btn-success btn-sm" onclick="window.location.href = '/ticket?modo=inserccion'">
-                                <span style="font-size: 1rem;">&#43;</span> Nuevo
-                            </button>
-                        </div>
-                    </div>
-                    <table class="table table-bordered table-hover" id="ticketsTable">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>#</th>
-                                <th>Asunto</th>
-                                <th>Categoria</th>
-                                <th>Estado</th>
-                                <th>Asignado a</th>
-                                <th>Creado el</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="tick" items="${tickets}">
-                                <tr style="cursor:pointer;" onclick="window.location.href = '/ticket?id=${tick.id}&modo=lectura'">
-                                    <td>${tick.numero}</td>
-                                    <td>${tick.titulo}</td>
-                                    <td><c:forEach var="categoria" items="${listaCategorias}">
-                                            <c:if test="${categoria.id == tick.categoria_id}">${categoria.nombre}</c:if>
-                                        </c:forEach>  </td>
-                                    <td><c:forEach var="estado" items="${listaEstados}">
-                                            <c:if test="${estado.id == tick.estado_id}">${estado.nombre}</c:if>
-                                        </c:forEach>  </td>
-                                    <td><c:forEach var="usuario" items="${integrantes}">
-                                            <c:if test="${usuario.id == tick.asignadoA}">${usuario.nombre}</c:if>
-                                        </c:forEach></td>
-                                    <td>${tick.fecha_creacion}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                
 
                 <div id="mistickets" class="table-responsive mt-4" style="display:none;">
                     <div class="d-flex align-items-center mb-3">

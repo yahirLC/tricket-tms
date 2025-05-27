@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AdminController {
+public class ClienteController {
 
     @Autowired
     private TicketService ticketService;
@@ -31,21 +31,17 @@ public class AdminController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping("/admin")
-    public String mostrarAdmin(HttpSession session, Model model) {
+    @GetMapping("/cliente")
+    public String mostrarCliente(HttpSession session, Model model) {
         UsuarioJPA usuario = (UsuarioJPA) session.getAttribute("usuarioLogueado");
 
-        if (usuario == null || !"admin".equals(usuario.getRol())) {
+        if (usuario == null || !"cliente".equals(usuario.getRol())) {
 
             return "redirect:/login";
         }
 
-        long totalTickets = ticketService.contarTickets();
         long totalMisTickets = ticketService.contarMisTickets(usuario.getId());
-        
-        model.addAttribute("totalTickets", totalTickets);
-        model.addAttribute("tickets", ticketService.listarTickets());
-        model.addAttribute("ticketsNoCerrados", ticketService.contarTicketsNoCerrados());
+ 
         
         model.addAttribute("totalMisTickets", totalMisTickets);
         model.addAttribute("misTickets", ticketService.listarTicketsPorAsignado(usuario.getId()));
@@ -66,12 +62,9 @@ public class AdminController {
         model.addAttribute("listaEstados", listaEstados);
         model.addAttribute("listaCategorias", listaCategorias);
 
-        return "admin";
+        return "cliente";
     }
     
-     @GetMapping("/")
-    public String redirectToLogin() {
-        return "redirect:/login";
-    }
+
 
 }

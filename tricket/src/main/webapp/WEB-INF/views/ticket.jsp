@@ -148,7 +148,8 @@
         <div style="display: flex;">
             <div class="ticket-sidebar">
                 <h4 class="text-center">TRICKET</h4>
-                <a href="/admin">Dashboard</a>
+                <a href="javascript:history.back()">Dashboard</a>
+     
                 <a href="#">Opción 2</a>
             </div>
 
@@ -159,65 +160,72 @@
 
                     <c:choose>
                         <c:when test="${modo == 'lectura'}">
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <h2 class="ticket-info-label">${ticket.numero} - ${ticket.titulo}</h2>
-                                    </div>
-                                    <div class="col-md-6">
 
-                                    </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <h2 class="ticket-info-label">${ticket.numero} - ${ticket.titulo}</h2>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
+                                <div class="col-md-6">
 
-                                        <p><span class="ticket-info-label">Estado:</span> 
-                                            <c:forEach var="estado" items="${listaEstados}">
-                                                <c:if test="${estado.id == ticket.estado_id}">${estado.nombre}</c:if>
-                                            </c:forEach>
-                                        </p>
-
-
-                                        <p><span class="ticket-info-label">Categoría:</span> 
-                                            <c:forEach var="categoria" items="${listaCategorias}">
-                                                <c:if test="${categoria.id == ticket.categoria_id}">${categoria.nombre}</c:if>
-                                            </c:forEach>    
-                                        </p>
-
-
-
-                                        <span class="ticket-info-label">Descripción:</span>
-                                        <div class="readonly-field">${ticket.descripcion}</div>
-                                        <p></p>
-                                        <p><span class="ticket-info-label">Fecha Creación:</span> ${ticket.fecha_creacion}</p>
-
-                                        <c:if test="${not empty ticket.fecha_cierre}">
-                                            <p><span class="ticket-info-label">Fecha Cierre:</span> ${ticket.fecha_cierre}</p>
-                                        </c:if>
-
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><span class="ticket-info-label">Severidad:</span> ${ticket.severidad}</p>
-                                        
-                                        <p><span class="ticket-info-label">Reportado por:</span> 
-                                            <c:forEach var="usuario" items="${integrantes}">
-                                                <c:if test="${usuario.id == ticket.usuario_id}">${usuario.nombre}</c:if>
-                                            </c:forEach>
-                                        </p>
-
-                                        <p><span class="ticket-info-label">Asignado a:</span> 
-                                            <c:forEach var="usuario" items="${integrantes}">
-                                                <c:if test="${usuario.id == ticket.asignadoA}">${usuario.nombre}</c:if>
-                                            </c:forEach>
-                                        </p>
-
-
-
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
 
-                                <a href="/admin" class="btn btn-secondary">Volver</a>
+                                    <p><span class="ticket-info-label">Estado:</span> 
+                                        <c:forEach var="estado" items="${listaEstados}">
+                                            <c:if test="${estado.id == ticket.estado_id}">${estado.nombre}</c:if>
+                                        </c:forEach>
+                                    </p>
+
+
+                                    <p><span class="ticket-info-label">Categoría:</span> 
+                                        <c:forEach var="categoria" items="${listaCategorias}">
+                                            <c:if test="${categoria.id == ticket.categoria_id}">${categoria.nombre}</c:if>
+                                        </c:forEach>    
+                                    </p>
+
+
+
+                                    <span class="ticket-info-label">Descripción:</span>
+                                    <div class="readonly-field">${ticket.descripcion}</div>
+                                    <p></p>
+                                    <p><span class="ticket-info-label">Fecha Creación:</span> ${ticket.fecha_creacion}</p>
+
+                                    <c:if test="${not empty ticket.fecha_cierre}">
+                                        <p><span class="ticket-info-label">Fecha Cierre:</span> ${ticket.fecha_cierre}</p>
+                                    </c:if>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <p><span class="ticket-info-label">Severidad:</span> ${ticket.severidad}</p>
+
+                                    <p><span class="ticket-info-label">Reportado por:</span> 
+                                        <c:forEach var="usuario" items="${integrantes}">
+                                            <c:if test="${usuario.id == ticket.usuario_id}">${usuario.nombre}</c:if>
+                                        </c:forEach>
+                                    </p>
+
+                                    <p><span class="ticket-info-label">Asignado a:</span> 
+                                        <c:forEach var="usuario" items="${integrantes}">
+                                            <c:if test="${usuario.id == ticket.asignadoA}">${usuario.nombre}</c:if>
+                                        </c:forEach>
+                                    </p>
+
+
+
+                                </div>
+                            </div>
+
+
+                            <form action="/ticket/cerrar" method="post" onsubmit="return confirm('¿Estás seguro de cerrar este ticket?');">
+                                <a href="javascript:history.back()" class="btn btn-secondary">Volver</a>
+
+                                <input type="hidden" name="id" value="${ticket.id}" />
+                                <button type="submit" class="btn btn-danger">Cerrar Ticket</button>
                             </form>
+
+
                         </c:when>
                         <c:when test="${modo == 'inserccion'}">
                             <form action="/guardarNuevoTicket" method="post">

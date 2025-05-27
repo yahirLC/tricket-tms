@@ -18,15 +18,27 @@ public class TicketService {
     }
 
     public List<TicketJPA> listarTicketsPorAsignado(Integer idAsignado) {
-    return ticketRepository.findByAsignadoA(idAsignado);
-}
-    
+        return ticketRepository.findByAsignadoA(idAsignado);
+    }
+
     public long contarTickets() {
         return ticketRepository.count();
     }
-    
-     public long contarMisTickets(Integer idAsignado) {
+
+    public long contarMisTickets(Integer idAsignado) {
         return ticketRepository.findByAsignadoA(idAsignado).size();
+    }
+
+    public long contarTicketsNoCerrados() {
+        return ticketRepository.findAll().stream()
+                .filter(ticket -> ticket.getEstado_id() != 3)
+                .count();
+    }
+
+    public long contarMisTicketsNoCerrados(Integer idAsignado) {
+        return ticketRepository.findByAsignadoA(idAsignado).stream()
+                .filter(ticket -> ticket.getEstado_id() != 3)
+                .count();
     }
 
     public TicketJPA obtenerTicketPorId(Integer id) {
