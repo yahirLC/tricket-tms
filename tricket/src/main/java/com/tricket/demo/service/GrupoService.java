@@ -12,12 +12,16 @@ public class GrupoService {
     @Autowired
     private GrupoRepository grupoRepository;
 
-
     public List<GrupoJPA> listarGrupos() {
         return grupoRepository.findAll();
     }
     
     
-    
+
+    public GrupoJPA crearGrupo(String nombre) {
+        GrupoJPA grupo = new GrupoJPA();
+        grupo.setNombre(nombre);
+        return grupoRepository.save(grupo);
+    }
+
 }
-    

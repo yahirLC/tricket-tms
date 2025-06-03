@@ -1,20 +1,20 @@
 package com.tricket.demo.controller;
 
-import com.tricket.demo.service.LogService;
+import com.tricket.demo.service.NotificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LogController {
+public class NotificacionController {
 
     @Autowired
-    private LogService logService;
+    private NotificacionService logService;
 
-    @GetMapping("/log")
+    @GetMapping("/notificaciones")
     public String listar(Model model) {
-        model.addAttribute("logs", logService.listarLogs());
+        model.addAttribute("logs", logService.listarNotificaciones());
         return "log";
     }
 

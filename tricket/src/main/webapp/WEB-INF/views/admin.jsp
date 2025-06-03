@@ -133,6 +133,7 @@
                 document.getElementById("mistickets").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("equipoContainer").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
+                document.getElementById("notificacionesContainer").style.display = "none";
                 buscarEnTabla();
             }
 
@@ -142,6 +143,7 @@
                 document.getElementById("mistickets").style.display = "block";
                 document.getElementById("equipoContainer").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
+                document.getElementById("notificacionesContainer").style.display = "none";
                 buscarEnMistickets();
             }
 
@@ -189,7 +191,7 @@
                         }
                     }
 
-                 
+
                     if (encontrado && (mostrarFinalizados || !esFinalizado)) {
                         rows[i].style.display = "";
                     } else {
@@ -238,8 +240,20 @@
                 document.getElementById("mistickets").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("equipoContainer").style.display = "flex";
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
+                document.getElementById("notificacionesContainer").style.display = "none";
             }
+
+            function mostrarNotificaciones() {
+                document.getElementById("dashboardRow").style.display = "none";
+                document.getElementById("tablaGenerales").style.display = "none";
+                document.getElementById("mistickets").style.display = "none"; // Asegurarse de ocultar otros
+                document.getElementById("equipoContainer").style.display = "none";
+                document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
+                document.getElementById("notificacionesContainer").style.display = "flex";
+            }
+
         </script>
+
 
         <script>
             let usuarioDestino = null;
@@ -384,6 +398,12 @@
                             <div class="dashboard-number">${totalIntegrantes}</div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="dashboard-card" onclick="mostrarNotificaciones()">
+                            <div class="dashboard-title">Notificaciones</div>
+                            <div class="dashboard-number">0</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="tablaGenerales" class="table-responsive mt-4">
@@ -481,6 +501,30 @@
                     </c:forEach>
                 </div>
 
+                <!-- Contenedor de notificaciones -->
+                <div id="notificacionesContainer" class="row g-3" style="display: none;">
+                    <c:forEach var="noti" items="${listaNotificaciones}" varStatus="status">
+                        <div class="border p-2" style="cursor: pointer;"
+                             data-bs-toggle="modal" data-bs-target="#notiModal${status.index}">
+                            ${noti.accion}
+                        </div>
+
+                        <!-- Modal para cada notificación -->
+                        <div class="modal fade" id="notiModal${status.index}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Notificación</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ${noti.descripcion}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
                 <div id="chatFlotante" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 300px; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.2); z-index: 9999; flex-direction: column;">
                     <div style="background-color: #0d6efd; color: white; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                         <strong id="nombreUsuarioChat">Chat</strong>

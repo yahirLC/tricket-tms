@@ -19,10 +19,13 @@ public class UsuarioService {
     public UsuarioJPA autenticar(String correo, String contrasena) {
         return usuarioRepository.findByCorreoAndContrasena(correo, contrasena);
     }
-    
+
     public List<UsuarioJPA> obtenerUsuariosPorGrupo(int grupoId) {
         return (List<UsuarioJPA>) usuarioRepository.findByGrupoId(grupoId);
     }
-    
+
+    public void guardar(UsuarioJPA usuario) {
+        usuarioRepository.save(usuario);
+    }
 
 }

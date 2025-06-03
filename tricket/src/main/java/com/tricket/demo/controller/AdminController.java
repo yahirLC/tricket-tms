@@ -2,9 +2,11 @@ package com.tricket.demo.controller;
 
 import com.tricket.demo.model.entity.CategoriaJPA;
 import com.tricket.demo.model.entity.EstadoJPA;
+import com.tricket.demo.model.entity.NotificacionJPA;
 import com.tricket.demo.model.entity.UsuarioJPA;
 import com.tricket.demo.service.CategoriaService;
 import com.tricket.demo.service.EstadoService;
+import com.tricket.demo.service.NotificacionService;
 
 import com.tricket.demo.service.TicketService;
 import com.tricket.demo.service.UsuarioService;
@@ -30,6 +32,10 @@ public class AdminController {
     
     @Autowired
     private CategoriaService categoriaService;
+    
+    @Autowired
+    private NotificacionService notificacionService;
+    
 
     @GetMapping("/admin")
     public String mostrarAdmin(HttpSession session, Model model) {
@@ -65,6 +71,10 @@ public class AdminController {
 
         model.addAttribute("listaEstados", listaEstados);
         model.addAttribute("listaCategorias", listaCategorias);
+        
+        List<NotificacionJPA> listaNotificaciones = notificacionService.listarNotificaciones();
+        
+        model.addAttribute("listaNotificaciones",listaNotificaciones);
 
         return "admin";
     }

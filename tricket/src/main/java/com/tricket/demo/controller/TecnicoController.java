@@ -6,7 +6,7 @@ import com.tricket.demo.service.ComentarioService;
 import com.tricket.demo.service.EstadoService;
 import com.tricket.demo.service.GrupoService;
 import com.tricket.demo.service.HistorialService;
-import com.tricket.demo.service.LogService;
+import com.tricket.demo.service.NotificacionService;
 import com.tricket.demo.service.TicketService;
 import com.tricket.demo.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
@@ -28,7 +28,7 @@ public class TecnicoController {
     private ComentarioService comentarioService;
 
     @Autowired
-    private LogService logService;
+    private NotificacionService notificacionService;
 
     @Autowired
     private TicketService ticketService;
@@ -67,7 +67,7 @@ public class TecnicoController {
         model.addAttribute("categorias", categoriaService.listarCategorias());
         model.addAttribute("comentarios", comentarioService.listarComentarios());
         model.addAttribute("grupos", grupoService.listarGrupos());
-        model.addAttribute("logs", logService.listarLogs());
+        model.addAttribute("notificaciones", notificacionService.listarNotificaciones());
         model.addAttribute("tickets", ticketService.listarTickets());
         model.addAttribute("historiales", historialService.listarHistoriales());
         model.addAttribute("estados", estadoService.listarEstados());

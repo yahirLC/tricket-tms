@@ -9,8 +9,8 @@ import jakarta.persistence.Table;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "log")
-public class LogJPA {
+@Table(name = "notificacion")
+public class NotificacionJPA {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +25,14 @@ public class LogJPA {
 
     @Column(name = "fecha")
     private Timestamp fecha;
+    
+    @Column(name = "descripcion")
+    private String descripcion;
 
-    public LogJPA() {
+    public NotificacionJPA() {
     }
 
-    public LogJPA(Integer id, Integer usuario_id, String accion, Timestamp fecha) {
+    public NotificacionJPA(Integer id, Integer usuario_id, String accion, Timestamp fecha) {
         this.id = id;
         this.usuario_id = usuario_id;
         this.accion = accion;
@@ -40,6 +43,8 @@ public class LogJPA {
         return id;
     }
 
+    
+    
     public void setId(Integer id) {
         this.id = id;
     }
@@ -67,5 +72,15 @@ public class LogJPA {
     public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
 
 }
