@@ -7,6 +7,7 @@ import com.tricket.demo.model.entity.UsuarioJPA;
 import com.tricket.demo.service.CategoriaService;
 import com.tricket.demo.service.EstadoService;
 import com.tricket.demo.service.NotificacionService;
+import com.tricket.demo.service.SolicitudService;
 
 import com.tricket.demo.service.TicketService;
 import com.tricket.demo.service.UsuarioService;
@@ -36,6 +37,9 @@ public class AdminController {
     @Autowired
     private NotificacionService notificacionService;
     
+    @Autowired
+    private SolicitudService solicitudService;
+    
 
     @GetMapping("/admin")
     public String mostrarAdmin(HttpSession session, Model model) {
@@ -46,12 +50,11 @@ public class AdminController {
             return "redirect:/login";
         }
 
-        long totalTickets = ticketService.contarTickets();
         long totalMisTickets = ticketService.contarMisTickets(usuario.getId());
         
-        model.addAttribute("totalTickets", totalTickets);
-        model.addAttribute("tickets", ticketService.listarTickets());
-        model.addAttribute("ticketsNoCerrados", ticketService.contarTicketsNoCerrados());
+        model.addAttribute("totalTickets", ticketService.listarTickets(usuario.getGrupoId()).size());
+        model.addAttribute("tickets", ticketService.listarTickets(usuario.getGrupoId()));
+        model.addAttribute("ticketsNoCerrados", ticketService.contarTicketsNoCerrados(usuario.getGrupoId()));
         
         model.addAttribute("totalMisTickets", totalMisTickets);
         model.addAttribute("misTickets", ticketService.listarTicketsPorAsignado(usuario.getId()));
@@ -72,9 +75,13 @@ public class AdminController {
         model.addAttribute("listaEstados", listaEstados);
         model.addAttribute("listaCategorias", listaCategorias);
         
-        List<NotificacionJPA> listaNotificaciones = notificacionService.listarNotificaciones();
+        List<NotificacionJPA> listaNotificaciones = notificacionService.listarNotificacionesPorUsuario(usuario.getId());
         
         model.addAttribute("listaNotificaciones",listaNotificaciones);
+        model.addAttribute("countNotificaciones",listaNotificaciones.size());
+        
+        model.addAttribute("listaSolicitudes",solicitudService.listarSolicitudes(grupoId));
+        model.addAttribute("countSolicitudes",solicitudService.listarSolicitudes(grupoId).size());
 
         return "admin";
     }

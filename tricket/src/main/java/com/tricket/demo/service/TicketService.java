@@ -13,6 +13,12 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    public List<TicketJPA> listarTickets(Integer idgrupo) {
+        return ticketRepository.findByGrupoId(idgrupo);
+
+
+    }
+
     public List<TicketJPA> listarTickets() {
         return ticketRepository.findAll();
     }
@@ -29,8 +35,8 @@ public class TicketService {
         return ticketRepository.findByAsignadoA(idAsignado).size();
     }
 
-    public long contarTicketsNoCerrados() {
-        return ticketRepository.findAll().stream()
+    public long contarTicketsNoCerrados(Integer idgrupo) {
+        return ticketRepository.findByGrupoId(idgrupo).stream()
                 .filter(ticket -> ticket.getEstado_id() != 3)
                 .count();
     }

@@ -23,8 +23,10 @@ public class UsuarioJPA {
     @Column(name = "correo", length = 100, nullable = false)
     private String correo;
 
-    @Column(name = "contrasena", nullable = false)
+    // ...
+    @Column(name = "contrasena", length = 60, nullable = false) // <--- ¡Asegúrate de que tenga al menos length=60!
     private String contrasena;
+// ...
 
     @Column(name = "rol", nullable = false)
     private String rol;
@@ -59,8 +61,6 @@ public class UsuarioJPA {
         this.apellido_materno = apellido_materno;
         this.apellido_paterno = apellido_paterno;
     }
-
-    
 
     public Integer getId() {
         return id;
@@ -110,8 +110,6 @@ public class UsuarioJPA {
         this.grupoId = grupoId;
     }
 
-
-
     public Timestamp getFecha_registro() {
         return fecha_registro;
     }
@@ -143,6 +141,5 @@ public class UsuarioJPA {
     public void setApellido_paterno(String apellido_paterno) {
         this.apellido_paterno = apellido_paterno;
     }
-    
-    
+
 }

@@ -9,12 +9,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioJPA, Integer> {
 
-    UsuarioJPA findByCorreoAndContrasena(String correo, String contrasena);
+   
+
     List<UsuarioJPA> findByGrupoId(int grupoId);
 
-    public Optional<UsuarioJPA> findById(Long receptorIdLong);
+    Optional<UsuarioJPA> findById(Long receptorIdLong);
 
+    Optional<UsuarioJPA> findByCorreo(String correo); // Lo necesitarás para buscar el usuario por correo
 
-
+    Optional<UsuarioJPA> findByUsuario(String usuario);
 
 }

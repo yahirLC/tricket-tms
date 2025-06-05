@@ -3,10 +3,12 @@ package com.tricket.demo.controller;
 import com.tricket.demo.model.entity.CategoriaJPA;
 import com.tricket.demo.model.entity.EstadoJPA;
 import com.tricket.demo.model.entity.GrupoJPA;
+import com.tricket.demo.model.entity.NotificacionJPA;
 import com.tricket.demo.model.entity.UsuarioJPA;
 import com.tricket.demo.service.CategoriaService;
 import com.tricket.demo.service.EstadoService;
 import com.tricket.demo.service.GrupoService;
+import com.tricket.demo.service.NotificacionService;
 
 import com.tricket.demo.service.TicketService;
 import com.tricket.demo.service.UsuarioService;
@@ -38,6 +40,9 @@ public class ClienteController {
     @Autowired
     private GrupoService grupoService;
 
+    @Autowired
+    private NotificacionService notificacionService;
+
     @GetMapping("/cliente")
     public String mostrarCliente(HttpSession session, Model model) {
         UsuarioJPA usuario = (UsuarioJPA) session.getAttribute("usuarioLogueado");
@@ -68,6 +73,11 @@ public class ClienteController {
         model.addAttribute("listaEstados", listaEstados);
         model.addAttribute("listaCategorias", listaCategorias);
 
+        List<NotificacionJPA> listaNotificaciones = notificacionService.listarNotificacionesPorUsuario(usuario.getId());
+
+        model.addAttribute("listaNotificaciones", listaNotificaciones);
+        model.addAttribute("countNotificaciones",listaNotificaciones.size());
+
         return "cliente";
     }
 
@@ -95,7 +105,7 @@ public class ClienteController {
 
             usuario.setRol("admin");
 
-            usuarioService.guardar(usuario);
+            usuarioService.actualizar(usuario);
 
             session.setAttribute("usuarioLogueado", usuario);
 

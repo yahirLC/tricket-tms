@@ -33,7 +33,7 @@ public class TicketJPA {
     private String severidad;
 
     @Column(name = "grupo_id")
-    private Integer grupo_id;
+    private Integer grupoId;  // camelCase
 
     @Column(name = "titulo", length = 255, nullable = false)
     private String titulo;
@@ -51,9 +51,7 @@ public class TicketJPA {
     private Timestamp fecha_cierre;
 
     public TicketJPA() {
-        
-        
-        
+
     }
 
     public Integer getId() {
@@ -104,12 +102,12 @@ public class TicketJPA {
         this.severidad = severidad;
     }
 
-    public Integer getGrupo_id() {
-        return grupo_id;
+    public Integer getGrupoId() {
+        return grupoId;
     }
 
-    public void setGrupo_id(Integer grupo_id) {
-        this.grupo_id = grupo_id;
+    public void setGrupoId(Integer grupoId) {
+        this.grupoId = grupoId;
     }
 
     public String getTitulo() {
@@ -151,8 +149,5 @@ public class TicketJPA {
     public void setFecha_cierre(Timestamp fecha_cierre) {
         this.fecha_cierre = fecha_cierre;
     }
-    
-    
-    
-    }
 
+}

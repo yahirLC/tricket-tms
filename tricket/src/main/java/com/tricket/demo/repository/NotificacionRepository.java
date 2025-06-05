@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface NotificacionRepository extends JpaRepository<NotificacionJPA, Integer> {
 
     List<NotificacionJPA> findAllByOrderByIdDesc();
+
+    List<NotificacionJPA> findByUsuarioIdOrderByIdDesc(Integer usuarioId);
+    
 }

@@ -7,9 +7,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TicketRepository extends JpaRepository<TicketJPA, Integer> {
-    
+
     long count();
-    
-     List<TicketJPA> findByAsignadoA(Integer asignadoA);
-    
+
+   
+    List<TicketJPA> findByGrupoId(Integer idgrupo);
+
+
+    List<TicketJPA> findByAsignadoA(Integer asignadoA);
+
 }

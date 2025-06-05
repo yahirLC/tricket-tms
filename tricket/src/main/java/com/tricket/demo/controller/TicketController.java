@@ -117,6 +117,8 @@ public class TicketController {
         if (ticket.getFecha_creacion() == null) {
             ticket.setFecha_creacion(new Timestamp(System.currentTimeMillis()));
         }
+        
+        ticket.setGrupoId(usuarioLogueado.getGrupoId());
         ticketService.guardarTicket(ticket);
         return "redirect:/admin"; // Redirige a la página de administración después de guardar
     }

@@ -134,6 +134,7 @@
                 document.getElementById("equipoContainer").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
                 document.getElementById("notificacionesContainer").style.display = "none";
+                document.getElementById("solicitudesContainer").style.display = "none";
                 buscarEnTabla();
             }
 
@@ -144,6 +145,7 @@
                 document.getElementById("equipoContainer").style.display = "none"; // Asegurarse de ocultar otros
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
                 document.getElementById("notificacionesContainer").style.display = "none";
+                document.getElementById("solicitudesContainer").style.display = "none";
                 buscarEnMistickets();
             }
 
@@ -241,6 +243,7 @@
                 document.getElementById("equipoContainer").style.display = "flex";
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
                 document.getElementById("notificacionesContainer").style.display = "none";
+                document.getElementById("solicitudesContainer").style.display = "none";
             }
 
             function mostrarNotificaciones() {
@@ -250,6 +253,17 @@
                 document.getElementById("equipoContainer").style.display = "none";
                 document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
                 document.getElementById("notificacionesContainer").style.display = "flex";
+                document.getElementById("solicitudesContainer").style.display = "none";
+            }
+
+            function mostrarSolicitudes() {
+                document.getElementById("dashboardRow").style.display = "none";
+                document.getElementById("tablaGenerales").style.display = "none";
+                document.getElementById("mistickets").style.display = "none"; // Asegurarse de ocultar otros
+                document.getElementById("equipoContainer").style.display = "none";
+                document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
+                document.getElementById("notificacionesContainer").style.display = "none";
+                document.getElementById("solicitudesContainer").style.display = "flex";
             }
 
         </script>
@@ -401,7 +415,13 @@
                     <div class="col-md-4">
                         <div class="dashboard-card" onclick="mostrarNotificaciones()">
                             <div class="dashboard-title">Notificaciones</div>
-                            <div class="dashboard-number">0</div>
+                            <div class="dashboard-number">${countNotificaciones}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dashboard-card" onclick="mostrarSolicitudes()">
+                            <div class="dashboard-title">Solicitudes</div>
+                            <div class="dashboard-number">${countSolicitudes}</div>
                         </div>
                     </div>
                 </div>
@@ -525,11 +545,57 @@
                         </div>
                     </c:forEach>
                 </div>
+
+
+                <div id="solicitudesContainer" class="row g-3" style="display: none;">
+                    <c:forEach var="soli" items="${listaSolicitudes}" varStatus="status">
+                        <div class="border p-2" style="cursor: pointer;"
+                             data-bs-toggle="modal" data-bs-target="#soliModal${status.index}"> 
+                            Solicitud de ${soli.iduser}
+                        </div>
+
+                        <div class="modal fade" id="soliModal${status.index}" tabindex="-1" aria-hidden="true"> 
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Solicitud</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        El usuario con id <strong>${soli.iduser}</strong> ha mandado una solicitud de ingreso.
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                                        <form method="post" action="/aceptarsolicitud">
+                                            <input type="hidden" name="iduser" value="${soli.iduser}" />
+                                            <input type="hidden" name="idgroup" value="${soli.idgroup}" /> <%-- ¡CAMBIO AQUÍ! --%>
+                                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                                        </form>
+
+                                        <form method="post" action="/rechazarsolicitud">
+                                            <input type="hidden" name="iduser" value="${soli.iduser}" />
+                                            <input type="hidden" name="idgroup" value="${soli.idgroup}" /> <%-- ¡CAMBIO AQUÍ! --%>
+                                            <button type="submit" class="btn btn-danger">Rechazar</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+
+
                 <div id="chatFlotante" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 300px; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.2); z-index: 9999; flex-direction: column;">
                     <div style="background-color: #0d6efd; color: white; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                         <strong id="nombreUsuarioChat">Chat</strong>
                         <span style="float: right; cursor: pointer;" onclick="cerrarChat()">✖</span>
                     </div>
+
                     <div id="chatMensajes" style="padding: 10px; max-height: 200px; overflow-y: auto;">
                         <p style="color: gray;">(Aquí irían los mensajes)</p>
                     </div>
