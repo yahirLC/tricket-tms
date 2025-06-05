@@ -3,8 +3,40 @@
 <html>
     <head>
         <title>Grupo de Usuario</title>
-        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                background: linear-gradient(-45deg, #a8e6cf, #dcedc1, #a8e6cf, #dcedc1);
+                background-size: 400% 400%;
+                animation: animateBackground 15s ease infinite;
+                display: flex; /* Añadido para centrar el contenido */
+                align-items: center; /* Centra verticalmente */
+                justify-content: center; /* Centra horizontalmente */
+            }
+
+            @keyframes animateBackground {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
+            .card {
+                background-color: rgba(255, 255, 255, 0.9); /* Ligeramente transparente para ver el fondo */
+            }
+
+            /* Estilos para los enlaces/botones de cambio de formulario */
+            .btn-link {
+                color: #28a745 !important; /* verde */
+            }
+
+            .btn-link:hover {
+                color: #1e7e34 !important;
+            }
+        </style>
 
         <script>
             function mostrarInputGrupoId() {
@@ -22,12 +54,11 @@
             }
         </script>
     </head>
-    <body class="bg-light d-flex align-items-center justify-content-center vh-100">
+    <body>
 
         <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
             <h3 class="text-center mb-4">¡Bienvenido!</h3>
 
-            <!-- Formulario para crear un nuevo grupo -->
             <form id="crearGrupo" action="/crearGrupo" method="post">
                 <div class="mb-3">
                     <label for="nombreGrupo" class="form-label">Nombre para el grupo:</label>
@@ -38,7 +69,6 @@
                 </div>
             </form>
 
-            <!-- Formulario oculto para ingresar a un grupo existente -->
             <form id="unirseGrupo" action="/unirseGrupo" method="post" style="display: none;">
                 <div class="mb-3 mt-4">
                     <label for="grupoId" class="form-label">ID del grupo:</label>
@@ -49,14 +79,12 @@
                 </div>
             </form>
 
-            <!-- Botones de navegación entre formularios -->
             <div class="text-center mt-3">
                 <button id="btnIngresarGrupo" class="btn btn-link p-0" onclick="mostrarInputGrupoId()">Ingresar a un grupo</button>
                 <button id="btnCrearGrupo" class="btn btn-link p-0" onclick="mostrarCrearGrupo()" style="display: none;">Crear grupo</button>
             </div>
         </div>
 
-        <!-- Bootstrap JS (opcional) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     </body>

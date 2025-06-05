@@ -13,7 +13,7 @@
             }
 
             .ticket-navbar {
-                background-color: #2c3e50; /* Azul oscuro */
+                background-color: #1a5e2e; /* Verde oscuro */
                 color: white;
                 padding: 0.5rem 1rem;
                 display: flex;
@@ -43,7 +43,7 @@
 
             .ticket-dropdown-menu-admin {
                 position: absolute;
-                background-color: #34495e;
+                background-color: #28a745; /* Verde Bootstrap */
                 color: white;
                 min-width: 80px;
                 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -65,7 +65,7 @@
             }
 
             .ticket-dropdown-menu-admin a:hover {
-                background-color: #555;
+                background-color: #218838; /* Un verde un poco más oscuro al pasar el ratón */
             }
 
             .ticket-sidebar {
@@ -83,7 +83,7 @@
             }
 
             .ticket-sidebar a.active, .ticket-sidebar a:hover {
-                background-color: #0d6efd;
+                background-color: #28a745; /* Verde Bootstrap */
                 color: white;
             }
 
@@ -148,7 +148,7 @@
             <div class="ticket-sidebar">
                 <h4 class="text-center">TRICKET</h4>
                 <a href="javascript:history.back()">Dashboard</a>
-                <a href="#">Opción 2</a>
+                
             </div>
 
             <div class="ticket-content">
@@ -234,7 +234,7 @@
                                                     <td>${historial.descripcion}</td>
                                                     <td>${historial.fechaModificacion}</td>
                                                     <td>${historial.usuarioQueModifico}</td>
-                                                    
+                                                   
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -297,7 +297,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-start gap-2">
-                                    <button type="submit" class="btn btn-primary">Actualizar Ticket</button>
+                                    <button type="submit" class="btn btn-success">Actualizar Ticket</button>
                                     <a href="/ticket?id=${ticket.id}&modo=lectura" class="btn btn-secondary">Cancelar</a>
                                 </div>
                             </form>
@@ -362,7 +362,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-start gap-2">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-success">
                                         <c:if test="${modo == 'inserccion'}">Crear Ticket</c:if>
                                         <c:if test="${modo == 'edicion'}">Actualizar Ticket</c:if>
                                     </button>

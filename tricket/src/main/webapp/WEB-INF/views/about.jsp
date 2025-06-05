@@ -6,23 +6,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-       
         body {
             display: flex;
             min-height: 100vh;
             flex-direction: column;
         }
 
-        
         .navbar-admin {
-            background-color: #2c3e50; 
+            background-color: #2c3e50; /* Puedes ajustar este color si quieres que la barra de navegación también sea verde */
             color: white;
             padding: 0.5rem 1rem;
             display: flex;
             justify-content: flex-end;
             align-items: center;
             font-size: 0.9rem;
-            flex-shrink: 0; 
+            flex-shrink: 0;
         }
         .admin-info {
             display: flex;
@@ -42,7 +40,7 @@
         }
         .dropdown-menu-admin {
             position: absolute;
-            background-color: #34495e;
+            background-color: #34495e; /* Puedes ajustar este color si quieres que el menú desplegable también sea verde */
             color: white;
             min-width: 80px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -60,19 +58,17 @@
             background-color: #555;
         }
 
-       
         .main-layout {
             display: flex;
             flex-grow: 1;
         }
 
-     
         .sidebar {
             width: 250px;
-            background-color: #f8f9fa; 
+            background-color: #f8f9fa;
             padding-top: 2rem;
-            flex-shrink: 0; 
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+            flex-shrink: 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
         .sidebar h4 {
             color: #333;
@@ -87,28 +83,25 @@
             transition: background-color 0.2s, color 0.2s;
         }
         .sidebar a.active, .sidebar a:hover {
-            background-color: #0d6efd; 
+            background-color: #28a745; /* Verde Bootstrap */
             color: white;
         }
 
-        
         .content {
             flex-grow: 1;
             padding: 2rem;
             background-color: #ffffff;
         }
 
-        
         .data-card {
             background-color: #ffffff;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            
-            height: 100%; 
+            height: 100%;
         }
         .data-card h2 {
-            color: #0d6efd;
+            color: #28a745; /* Verde Bootstrap */
             border-bottom: 1px solid #eee;
             padding-bottom: 1rem;
             margin-bottom: 1.5rem;
@@ -119,18 +112,15 @@
             align-items: baseline;
         }
         .data-item strong {
-            color: #34495e; 
+            color: #34495e;
             display: inline-block;
-            width: 130px; 
-            flex-shrink: 0; 
+            width: 130px;
+            flex-shrink: 0;
         }
         .data-item span {
             color: #555;
-            flex-grow: 1; 
+            flex-grow: 1;
         }
-
-        
-       
     </style>
 </head>
 <body>
@@ -151,14 +141,13 @@
         <div class="sidebar">
             <h4 class="text-center">TRICKET</h4>
             <a href="javascript:history.back()">Dashboard</a>
-            
-            <a href="/aboutMe" class="active">Mis datos</a> 
+            <a href="/aboutMe" class="active">Mis datos</a>
         </div>
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row g-4 mb-4"> 
-                    <div class="col-md-6"> 
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
                         <div class="data-card">
                             <h2>Mis Datos Personales</h2>
                             <c:if test="${not empty usuarioLogueado}">
@@ -166,7 +155,7 @@
                                 <div class="data-item"><strong>Nombre:</strong> <span>${usuarioLogueado.nombre}</span></div>
                                 <div class="data-item"><strong>Apellido Paterno:</strong> <span>${usuarioLogueado.apellido_paterno}</span></div>
                                 <div class="data-item"><strong>Apellido Materno:</strong> <span>${usuarioLogueado.apellido_materno}</span></div>
-                                <div class="data-item"><strong>Email:</strong> <span>${usuarioLogueado.correo}</span></div> <%-- Corregido: .email a .correo --%>
+                                <div class="data-item"><strong>Email:</strong> <span>${usuarioLogueado.correo}</span></div>
                                 <div class="data-item"><strong>Usuario:</strong> <span>${usuarioLogueado.usuario}</span></div>
                                 <div class="data-item"><strong>Rol:</strong> <span>${usuarioLogueado.rol}</span></div>
                                 <div class="data-item"><strong>Fecha de Registro:</strong> <span>${usuarioLogueado.fecha_registro}</span></div>
@@ -179,7 +168,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6"> 
+                    <div class="col-md-6">
                         <div class="data-card">
                             <h2>Datos de Mi Grupo</h2>
                             <c:if test="${not empty grupoDelUsuario}">
