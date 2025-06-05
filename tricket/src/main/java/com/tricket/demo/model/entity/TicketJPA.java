@@ -130,7 +130,7 @@ public class TicketJPA {
         return asignadoA;
     }
 
-    public void setAsignado_a(Integer asignado_a) {
+    public void setAsignadoA(Integer asignado_a) {
         this.asignadoA = asignado_a;
     }
 

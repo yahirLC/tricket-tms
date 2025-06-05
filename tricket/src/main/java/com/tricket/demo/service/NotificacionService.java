@@ -20,4 +20,8 @@ public class NotificacionService {
     public List<NotificacionJPA> listarNotificaciones() {
         return notificacionRepository.findAllByOrderByIdDesc(); // o el campo que elijas
     }
+
+    public NotificacionJPA guardarNotificacion(NotificacionJPA notificacion) {
+        return notificacionRepository.save(notificacion);
+    }
 }

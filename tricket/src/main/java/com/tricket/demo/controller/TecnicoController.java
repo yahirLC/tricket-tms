@@ -69,7 +69,7 @@ public class TecnicoController {
         model.addAttribute("grupos", grupoService.listarGrupos());
         model.addAttribute("notificaciones", notificacionService.listarNotificaciones());
         model.addAttribute("tickets", ticketService.listarTickets());
-        model.addAttribute("historiales", historialService.listarHistoriales());
+        
         model.addAttribute("estados", estadoService.listarEstados());
         model.addAttribute("usuarios", usuarioService.listarUsuarios());
 

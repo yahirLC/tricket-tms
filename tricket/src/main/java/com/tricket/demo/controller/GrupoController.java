@@ -1,5 +1,6 @@
 package com.tricket.demo.controller;
 
+import com.tricket.demo.model.entity.GrupoJPA;
 import com.tricket.demo.model.entity.UsuarioJPA;
 import com.tricket.demo.service.GrupoService;
 import com.tricket.demo.service.SolicitudService;
@@ -32,7 +33,7 @@ public class GrupoController {
             HttpSession session, // Inyecta la sesión
             RedirectAttributes redirectAttributes) {
 
-        // 1. Obtener el ID del usuario de la sesión
+        
         UsuarioJPA usuarioLogueado = (UsuarioJPA) session.getAttribute("usuarioLogueado");
 
         if (usuarioLogueado == null || usuarioLogueado.getId() == null) {
@@ -42,7 +43,7 @@ public class GrupoController {
 
         Integer iduser = usuarioLogueado.getId();
 
-        // 2. Crear la solicitud de unión
+        
         boolean solicitudCreada = solicitudService.crearSolicitud(iduser, idgroup);
 
         if (solicitudCreada) {
@@ -51,8 +52,31 @@ public class GrupoController {
             redirectAttributes.addFlashAttribute("error", "Ya existe una solicitud pendiente o te has unido a este grupo previamente.");
         }
 
-        // Puedes redirigir a una página de confirmación, a la página principal o a la lista de grupos
-        return "redirect:/login"; // O a la vista de donde viene el formulario (ej. '/grupos')
+        
+        return "redirect:/login"; 
+    }
+
+    @GetMapping("/aboutMe")
+    public String showAboutMe(Model model, HttpSession session) {
+        UsuarioJPA usuarioLogueado = (UsuarioJPA) session.getAttribute("usuarioLogueado");
+
+        if (usuarioLogueado == null) {
+            
+            return "redirect:/login"; 
+        }
+
+        
+        model.addAttribute("usuarioLogueado", usuarioLogueado);
+
+        
+        GrupoJPA grupoDelUsuario = null;
+        if (usuarioLogueado.getGrupoId() != null) { // Asume que UsuarioJPA tiene un getGrupoId()
+            
+            grupoDelUsuario = grupoService.obtenerGrupoPorId(usuarioLogueado.getGrupoId());
+        }
+        model.addAttribute("grupoDelUsuario", grupoDelUsuario);
+
+        return "about"; 
     }
 
 }

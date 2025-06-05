@@ -7,11 +7,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
         <style>
-            /* ... (tu CSS existente) ... */
+            
             body {
                 display: flex;
                 min-height: 100vh;
-                flex-direction: column; /* Para que la barra de navegación esté encima del resto del contenido */
+                flex-direction: column; 
             }
             .navbar-admin {
                 background-color: #2c3e50; /* Azul oscuro */
@@ -389,7 +389,8 @@
             <div class="sidebar">
                 <h4 class="text-center">TRICKET</h4>
                 <a href="/admin">Dashboard</a>
-                <a href="#">Opción 2</a>
+                
+                <a href="/aboutMe">Mis datos</a>
             </div>
 
             <div class="content">
@@ -516,7 +517,7 @@
                 <div id="equipoContainer" class="row g-3" style="display: none;">
                     <c:forEach var="user" items="${integrantes}">
                         <div onclick="abrirChat('${user.nombre}', '${user.id}')" style="cursor: pointer; padding: 10px; border: 1px solid #ddd; margin-bottom: 5px;">
-                            ${user.nombre}
+                            ${user.nombre} #${user.id}
                         </div>
                     </c:forEach>
                 </div>

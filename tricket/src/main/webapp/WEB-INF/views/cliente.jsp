@@ -7,18 +7,18 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
         <style>
-            /* ... (tu CSS existente) ... */
+            
             body {
                 display: flex;
                 min-height: 100vh;
-                flex-direction: column; /* Para que la barra de navegación esté encima del resto del contenido */
+                flex-direction: column;
             }
             .navbar-admin {
-                background-color: #2c3e50; /* Azul oscuro */
+                background-color: #2c3e50;
                 color: white;
                 padding: 0.5rem 1rem;
                 display: flex;
-                justify-content: flex-end; /* Alinea los elementos a la derecha */
+                justify-content: flex-end; 
                 align-items: center;
                 font-size: 0.9rem;
             }
@@ -44,7 +44,7 @@
                 min-width: 80px;
                 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
                 z-index: 1;
-                right: 0; /* Alinea el menú desplegable a la derecha */
+                right: 0; 
             }
             .dropdown-menu-admin a {
                 color: white;
@@ -95,32 +95,32 @@
                 font-weight: bold;
             }
 
-            /* Estilos para el chat flotante, si es necesario ajustar */
+            
             #chatFlotante {
                 position: fixed;
                 bottom: 20px;
                 right: 20px;
                 width: 300px;
-                height: 400px; /* Altura fija para el chat */
+                height: 400px; 
                 background-color: white;
                 border: 1px solid #ccc;
                 z-index: 1000;
                 box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
                 border-radius: 10px;
                 overflow: hidden;
-                display: none; /* Asegura que esté oculto al inicio */
-                flex-direction: column; /* Para organizar el contenido del chat */
+                display: none;
+                flex-direction: column; 
             }
-            #chatFlotante > div:first-child { /* Encabezado del chat */
+            #chatFlotante > div:first-child { 
                 flex-shrink: 0;
             }
-            #chatMensajes { /* CAMBIO: ID del contenedor de mensajes del chat */
-                flex-grow: 1; /* Permite que ocupe el espacio restante */
+            #chatMensajes { 
+                flex-grow: 1; 
                 overflow-y: auto;
                 padding: 10px;
                 background: #f8f9fa;
             }
-            #chatFlotante > div:last-child { /* Área de input y botón */
+            #chatFlotante > div:last-child {
                 flex-shrink: 0;
             }
         </style>
@@ -131,17 +131,17 @@
                 document.getElementById("dashboardRow").style.display = "none";
 
                 document.getElementById("mistickets").style.display = "block";
-                document.getElementById("equipoContainer").style.display = "none"; // Asegurarse de ocultar otros
-                document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
+                document.getElementById("equipoContainer").style.display = "none";
+                document.getElementById("chatFlotante").style.display = "none";
                 document.getElementById("notificacionesContainer").style.display = "none";
                 buscarEnMistickets();
             }
 
             function mostrarNotificaciones() {
                 document.getElementById("dashboardRow").style.display = "none";
-                document.getElementById("mistickets").style.display = "none"; // Asegurarse de ocultar otros
+                document.getElementById("mistickets").style.display = "none";
                 document.getElementById("equipoContainer").style.display = "none";
-                document.getElementById("chatFlotante").style.display = "none"; // Ocultar chat si se cambia de sección
+                document.getElementById("chatFlotante").style.display = "none"; 
                 document.getElementById("notificacionesContainer").style.display = "flex";
             }
 
@@ -150,7 +150,7 @@
                 dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
             }
 
-            // Cerrar el dropdown si se hace clic fuera de él
+            
             window.onclick = function (event) {
                 if (!event.target.matches('.dropdown-toggle-admin')) {
                     var dropdowns = document.getElementsByClassName("dropdown-menu-admin");
@@ -245,8 +245,7 @@
         <script>
             let usuarioDestino = null;
 
-            // Estos valores ya se insertan como strings desde el servidor JSP.
-            // Aseguramos que son strings quitando parseInt().
+            
             const usuarioActualId = '${usuarioLogueado.id}';
             const usuarioActualNombre = '${usuarioLogueado.nombre}';
 
@@ -281,7 +280,7 @@
 
                 const nuevoMensajeDiv = document.createElement("div");
                 nuevoMensajeDiv.style.margin = "5px 0";
-                nuevoMensajeDiv.innerHTML = '<b>Tú:</b> ' + mensaje; // Usar concatenación simple para el DOM
+                nuevoMensajeDiv.innerHTML = '<b>Tú:</b> ' + mensaje; 
                 chatBox.appendChild(nuevoMensajeDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
                 input.value = "";
@@ -289,8 +288,8 @@
                 const emisorId = usuarioActualId;
                 const receptorId = usuarioDestino;
 
-                // --- CAMBIO CLAVE: Construir la URL con concatenación pura para evitar cualquier ambigüedad de JSP/EL ---
-                // Esto asegura que encodeURIComponent(mensaje) sea evaluado por el navegador.
+                
+                
                 const urlEnviar = "/chat/enviar?emisor=" + emisorId + "&receptor=" + receptorId + "&contenido=" + encodeURIComponent(mensaje);
 
                 fetch(urlEnviar, {
@@ -305,7 +304,7 @@
             }
 
             function cargarHistorialChat(usuario1Id, usuario2Id) {
-                // --- CAMBIO CLAVE: Construir la URL con concatenación pura ---
+                
                 const urlConversacion = "/chat/conversacion?usuario1=" + usuario1Id + "&usuario2=" + usuario2Id;
 
                 fetch(urlConversacion, {
@@ -362,7 +361,8 @@
             <div class="sidebar">
                 <h4 class="text-center">TRICKET</h4>
                 <a href="/cliente">Dashboard</a>
-                <a href="#">Opción 2</a>
+                
+                <a href="/aboutMe">Mis datos</a>
             </div>
 
             <div class="content">
@@ -434,7 +434,7 @@
                 <div id="equipoContainer" class="row g-3" style="display: none;">
                     <c:forEach var="user" items="${integrantes}">
                         <div onclick="abrirChat('${user.nombre}', '${user.id}')" style="cursor: pointer; padding: 10px; border: 1px solid #ddd; margin-bottom: 5px;">
-                            ${user.nombre}
+                            ${user.nombre} #${user.id}
                         </div>
                     </c:forEach>
                 </div>

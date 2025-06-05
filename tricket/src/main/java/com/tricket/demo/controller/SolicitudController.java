@@ -22,17 +22,17 @@ public class SolicitudController {
             @RequestParam("idgroup") Integer idgroup,
             RedirectAttributes redirectAttributes) {
 
-        // Puedes agregar validaciones similares a las de aceptar solicitud aquí.
+        
         boolean rejected = solicitudService.rechazarSolicitud(iduser, idgroup);
 
         if (rejected) {
         
-// Puedes agregar validaciones similares a las de aceptar solicitud aquí.
+
             redirectAttributes.addFlashAttribute("mensaje", "Solicitud rechazada exitosamente.");
         } else {
             redirectAttributes.addFlashAttribute("mensaje", "Error al rechazar la solicitud o no encontrada.");
         }
-        return "redirect:/admin"; // Redirige de vuelta al dashboard del administrador
+        return "redirect:/admin"; 
     }
     
      @PostMapping("/aceptarsolicitud")
@@ -47,7 +47,7 @@ public class SolicitudController {
         } else {
             redirectAttributes.addFlashAttribute("mensaje", "Error al aceptar la solicitud o no encontrada. O el usuario no pudo ser asignado al grupo.");
         }
-        return "redirect:/admin"; // Redirige de vuelta al dashboard del administrador
+        return "redirect:/admin"; 
     }
 
 }
